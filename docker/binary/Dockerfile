@@ -4,8 +4,7 @@ RUN apt update && apt install -y wget
 
 RUN useradd -ms /bin/bash adriantandara
 
-RUN mkdir -p /dist && \
-    chown -R adriantandara:adriantandara /dist
+RUN mkdir -p /dist && chown -R adriantandara:adriantandara /dist
 
 USER adriantandara
 
