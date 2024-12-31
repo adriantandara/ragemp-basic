@@ -5,3 +5,5 @@ services:
       dockerfile: ../../docker/binary/Dockerfile
     volumes:
       - ../../packages/server:/mnt
+    env_file:
+      - .env
