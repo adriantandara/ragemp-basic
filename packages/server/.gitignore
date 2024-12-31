@@ -1,0 +1,11 @@
+# Project Directories
+node_modules
+dist
+
+# Project Files
+*.log
+*.exe
+*.dll
+*_old
+.env
+ipc.txt
