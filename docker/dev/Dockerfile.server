@@ -1,5 +1,16 @@
-FROM node:20 AS base
+# Use the official Node.js 20 image as base
+FROM node:20
+
 WORKDIR /app
+
+RUN apt update && \
+    add-apt-repository -y ppa:ubuntu-toolchain-r/test && \
+    apt update && \
+    apt install -y libstdc++6 && \
+    rm -rf /var/lib/apt/lists/*
+
 COPY package*.json ./
+
 RUN npm install
+
 CMD ["npm", "run", "start"]

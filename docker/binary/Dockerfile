@@ -1,11 +1,6 @@
 FROM ubuntu:22.04
 
-RUN apt update && \
-    apt install -y wget software-properties-common && \
-    add-apt-repository -y ppa:ubuntu-toolchain-r/test && \
-    apt update && \
-    apt install -y libstdc++6 && \
-    rm -rf /var/lib/apt/lists/*
+RUN apt update && apt install -y wget
 
 RUN useradd -ms /bin/bash adriantandara
 
