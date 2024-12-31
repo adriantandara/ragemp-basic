@@ -1,0 +1,7 @@
+services:
+  binary:
+    build:
+      context: ../../packages/server
+      dockerfile: ../../docker/binary/Dockerfile
+    volumes:
+      - ../../packages/server:/mnt

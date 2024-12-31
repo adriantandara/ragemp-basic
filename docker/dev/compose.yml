@@ -1,0 +1,52 @@
+services:
+  database:
+    image: postgres:7.2
+    environment:
+      - POSTGRES_PASSWORD=${SERVER_DB_PASSWORD}
+      - POSTGRES_USER=${SERVER_DB_USERNAME}
+      - POSTGRES_DB=${SERVER_DB_NAME}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    networks:
+      - app_network
+
+  server:
+    build:
+      context: ../../packages/server
+      dockerfile: ../../docker/dev/Dockerfile.server
+    environment:
+      - DB_HOST=${SERVER_DB_HOST}
+      - DB_USERNAME=${SERVER_DB_USERNAME}
+      - DB_PASSWORD=${SERVER_DB_PASSWORD}
+      - DB_NAME=${SERVER_DB_NAME}
+      - HASH_SALT=${SERVER_HASH_SALT}
+    ports:
+      - "22006:22006"
+      - "22005:22005/udp"
+    volumes:
+      - ../../packages/server:app
+    networks:
+      - app_network
+
+  client:
+    build:
+      context: ../../packages/client
+      dockerfile: ../../docker/dev/Dockerfile.client
+    volumes:
+      - ../../packages/client:/app
+
+  compiler:
+    build:
+      context: ../../packages/server
+      dockerfile: ../../docker/dev/Dockerfile.compiler
+    volumes:
+      - ../../packages/server:/app
+
+volumes:
+  pg_data:
+
+networks:
+  app_network:
+    driver: bridge
