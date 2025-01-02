@@ -1,5 +1,6 @@
 services:
   binary:
+    container_name: rage-binary
     build:
       context: ../../packages/server
       dockerfile: ../../docker/binary/Dockerfile

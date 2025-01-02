@@ -87,10 +87,6 @@ const generateConfig = (options = {}) => {
     "tsconfig.json",
   ]);
 
-  setTimeout(() => {
-    console.log("Compiler started");
-  }, 1000);
-
   return {
     input: resolvePath([
       sourcePath,

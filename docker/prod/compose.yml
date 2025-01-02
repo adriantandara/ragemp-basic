@@ -1,6 +1,6 @@
 services:
   database:
-    image: postgres:7.2
+    image: postgres:17.2
     environment:
       - POSTGRES_PASSWORD=${SERVER_DB_PASSWORD}
       - POSTGRES_USER=${SERVER_DB_USERNAME}

@@ -91,9 +91,10 @@ To set up the development environment, follow the steps below.
 
 ### Step 4: Compile and Run the Server (Compiler)
 
-1. In the **Compiler** terminal, navigate to the server directory:
+1. In the **Compiler** terminal, start docker container with node:20 and navigate to the server directory:
 
    ```bash
+   docker run -it --rm -v "$(pwd)":/app node:20 bash -c "cd /app && bash"
    cd packages/server
    ```
 
