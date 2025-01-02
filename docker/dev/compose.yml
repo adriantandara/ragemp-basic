@@ -39,10 +39,10 @@ services:
 
   compiler:
     build:
-      context: ../../packages/server
+      context: ../../packages/compiler
       dockerfile: ../../docker/dev/Dockerfile.compiler
     volumes:
-      - ../../packages/server:/app
+      - ../../packages/compiler:/app
 
 volumes:
   pg_data:

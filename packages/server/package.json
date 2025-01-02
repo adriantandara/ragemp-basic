@@ -1,0 +1,13 @@
+{
+  "devDependencies": {
+    "@ragempcommunity/types-client": "^2.1.8",
+    "@ragempcommunity/types-server": "^2.1.8",
+    "@types/fs-extra": "^11.0.4",
+    "colorette": "^2.0.20"
+  },
+  "dependencies": {
+    "fs-extra": "^11.2.0",
+    "pg": "^8.13.1",
+    "typeorm": "^0.3.20"
+  }
+}
