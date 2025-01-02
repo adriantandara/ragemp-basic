@@ -1,5 +1,6 @@
 *
 !/scripts
+!/dist
 !/src
 !/package.json
 !/package-lock.json

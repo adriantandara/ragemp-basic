@@ -7,9 +7,9 @@ import { builtinModules } from "module";
 import jetpack from "fs-jetpack";
 import path from "path";
 
-const buildOutput = "../server/dist";
-const sourcePath = path.resolve("../server/src");
-const pkgJson = jetpack.read("../server/package.json", "json");
+const buildOutput = "dist";
+const sourcePath = path.resolve("src");
+const pkgJson = jetpack.read("package.json", "json");
 const localInstalledPackages = [...Object.keys(pkgJson.dependencies)];
 
 function resolvePath(pathParts) {
@@ -86,6 +86,10 @@ const generateConfig = (options = {}) => {
     isServer ? "server" : "client",
     "tsconfig.json",
   ]);
+
+  setTimeout(() => {
+    console.log("Compiler started");
+  }, 1000);
 
   return {
     input: resolvePath([

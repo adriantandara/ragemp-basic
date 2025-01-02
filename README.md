@@ -1,59 +1,112 @@
-# Project Setup Guide
+# Setup Guide for Production and Development
 
-This guide will walk you through the steps to set up your environment and get the necessary components running.
+## Production Setup
 
-## 1. Setup Environment
+To set up the production environment, follow these steps:
 
-### Step 1: Build the binaries
+1. Navigate to the production Docker directory:
 
-1. Navigate to the `docker/binary` directory:
+   ```bash
+   cd docker/prod
+   ```
+
+2. Build and start the Docker containers:
+
+   ```bash
+   docker compose up --build -d
+   ```
+
+   This will build and start the production environment in detached mode.
+
+---
+
+## Development Setup
+
+To set up the development environment, follow the steps below.
+
+### Step 1: Prepare the Binary
+
+1. Open a terminal for the binary build.
+
+   Navigate to the binary Docker directory:
 
    ```bash
    cd docker/binary
    ```
 
-2. Run the following command to build the binaries:
-   ```bash
-   docker-compose up --build -d
-   ```
-   This command will generate the required binaries in the `dist` folder for `ragemp` on Linux.
-
-### Step 2: Start the Development Server
-
-1. After building the binaries, navigate back to the root directory by running:
+2. Build and start the Docker containers:
 
    ```bash
-   cd ../../
+   docker compose up --build -d
    ```
 
-2. Go to the `docker/dev` directory:
+   This will generate the binary and place it in the `packages/server/dist` directory.
+
+3. After the binary is generated, close the terminal.
+
+### Step 2: Start Docker Development Environment
+
+1. Open three separate terminals: one for Docker development, one for RAGE MP, and one for the compiler.
+
+2. In the **Docker Development** terminal, navigate to the development Docker directory:
 
    ```bash
    cd docker/dev
    ```
 
-3. Run the following command to start the development server and compiler:
+3. Build and start the Docker containers for development:
 
    ```bash
-   docker-compose up --build
+   docker compose up --build -d
    ```
 
-   This will build and start the server in development mode along with the compiler.
+### Step 3: Manage the Server (RAGE MP)
 
-## 2. Restart the Server
+1. In the **RAGE MP** terminal, navigate to the same directory as the Docker development terminal:
 
-If you need to restart the server, follow these steps:
-
-1. Open a new terminal window.
-
-2. Run the following command to restart the server:
    ```bash
-   docker-compose restart server
+   cd docker/dev
    ```
 
-This will restart the server in the development environment.
+2. Use the following commands to manage the server:
 
-## 3. Notes
+   - Restart the server:
 
-- Make sure you have Docker and Docker Compose installed on your system.
-- These steps assume you are working on a Linux machine for the `ragemp` binary generation.
+     ```bash
+     docker compose restart server
+     ```
+
+   - Or stop and start the server:
+
+     ```bash
+     docker compose stop server
+     docker compose start server
+     ```
+
+   - If you've made updates, you can use `--build` to rebuild the Docker containers:
+
+     ```bash
+     docker compose up --build -d
+     ```
+
+### Step 4: Compile and Run the Server (Compiler)
+
+1. In the **Compiler** terminal, navigate to the server directory:
+
+   ```bash
+   cd packages/server
+   ```
+
+2. Run the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+---
+
+## Notes
+
+- Make sure that your system meets the necessary requirements for Docker and Node.js.
+- The steps for the development setup assume you are working with Docker containers for both the application and services.
+- For any updates or changes to the server, remember to restart the Docker container using the `docker compose` commands listed above.

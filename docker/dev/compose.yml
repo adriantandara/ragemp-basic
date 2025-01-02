@@ -1,5 +1,6 @@
 services:
   database:
+    container_name: rage-dev-database
     image: postgres:7.2
     environment:
       - POSTGRES_PASSWORD=${SERVER_DB_PASSWORD}
@@ -13,6 +14,7 @@ services:
       - app_network
 
   server:
+    container_name: rage-dev-server
     build:
       context: ../../packages/server
       dockerfile: ../../docker/dev/Dockerfile.server
@@ -21,7 +23,6 @@ services:
       - DB_USERNAME=${SERVER_DB_USERNAME}
       - DB_PASSWORD=${SERVER_DB_PASSWORD}
       - DB_NAME=${SERVER_DB_NAME}
-      - HASH_SALT=${SERVER_HASH_SALT}
     ports:
       - "22006:22006"
       - "22005:22005/udp"
@@ -29,20 +30,22 @@ services:
       - ../../packages/server:/app
     networks:
       - app_network
+    depends_on:
+      - client
 
   client:
+    container_name: rage-dev-client
     build:
       context: ../../packages/client
       dockerfile: ../../docker/dev/Dockerfile.client
     volumes:
       - ../../packages/client:/app
-
-  compiler:
-    build:
-      context: ../../packages/compiler
-      dockerfile: ../../docker/dev/Dockerfile.compiler
-    volumes:
-      - ../../packages/compiler:/app
+    ports:
+      - "5173:5173"
+    networks:
+      - app_network
+    depends_on:
+      - database
 
 volumes:
   pg_data:
