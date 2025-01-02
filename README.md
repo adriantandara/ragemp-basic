@@ -42,7 +42,7 @@ To set up the development environment, follow the steps below.
 
    This will generate the binary and place it in the `packages/server/dist` directory.
 
-3. After the binary is generated, close the terminal.
+3. After the binary is generated, execute `docker compose down` for delete containers and close the terminal.
 
 ### Step 2: Start Docker Development Environment
 
